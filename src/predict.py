@@ -6,6 +6,40 @@ MODEL_PATH = "models/balanced_logistic_regression.pkl"
 
 model = joblib.load(MODEL_PATH)
 
+REQUIRED_FEATURES = [
+    "status",
+    "duration",
+    "credit_history",
+    "purpose",
+    "amount",
+    "savings",
+    "employment_duration",
+    "installment_rate",
+    "personal_status_sex",
+    "other_debtors",
+    "present_residence",
+    "property",
+    "age",
+    "other_installment_plans",
+    "housing",
+    "number_credits",
+    "job",
+    "people_liable",
+    "telephone",
+    "foreign_worker"
+]
+
+#Müşteri verisinde modelin beklediği 20 alan var mı? kontrol eden fonksiyon
+def validate_customer_data(customer_data):
+    missing_features = []
+
+    for feature in REQUIRED_FEATURES:
+        if feature not in customer_data:
+            missing_features.append(feature)
+
+    if missing_features:
+        raise ValueError(f"Eksik müşteri bilgileri: {missing_features}")
+    
 
 # Kötü kredi olasılığını 300–850 arasında bir kredi skoruna çevirir.
 def calculate_credit_score(bad_credit_probability):
@@ -32,8 +66,10 @@ def get_risk_band(bad_credit_probability):
     else:
         return "High Risk"
 
-
+#Tahmin başlamadan önce müşteri verisi kontrol ediliyor.
 def predict_credit_risk(customer_data):
+    validate_customer_data(customer_data)
+
     customer_df = pd.DataFrame([customer_data])
 
     prediction = model.predict(customer_df)[0]
