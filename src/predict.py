@@ -32,6 +32,9 @@ REQUIRED_FEATURES = [
 ]
 
 #Müşteri verisinde modelin beklediği 20 alan var mı? kontrol eden fonksiyon
+""" Tahmin öncesinde müşteri verisinde gerekli tüm alanların bulunup bulunmadığını kontrol eder.
+    Eksik alan varsa ValueError hatası üretir ve eksik alanları listeler.
+"""
 def validate_customer_data(customer_data):
     missing_features = []
 
@@ -44,12 +47,21 @@ def validate_customer_data(customer_data):
     
 
 # Kötü kredi olasılığını 300–850 arasında bir kredi skoruna çevirir.
+""" Kötü kredi olasılığını 300–850 aralığında kredi skoruna dönüştürür.
+    Risk azaldıkça kredi skoru yükselir.
+"""
 def calculate_credit_score(bad_credit_probability):
     credit_score = 300 + (1 - bad_credit_probability) * 550
     return int(round(credit_score))
 
 
 # Risk olasılığına göre APPROVE, REVIEW veya DECLINE kararı üretir.
+""" Kötü kredi olasılığına göre kredi başvurusu için karar üretir.
+    Karar kuralları:
+    - 0.25 altı: APPROVE
+    - 0.25 ile 0.55 arası: REVIEW
+    - 0.55 ve üzeri: DECLINE
+"""
 def make_credit_decision(bad_credit_probability):
     if bad_credit_probability < 0.25:
         return "APPROVE"
@@ -60,6 +72,12 @@ def make_credit_decision(bad_credit_probability):
 
 
 # Risk olasılığını Low Risk, Medium Risk veya High Risk olarak etiketler.
+"""Kötü kredi olasılığına göre müşterinin risk seviyesini belirler.
+    Risk seviyeleri:
+    - 0.25 altı: Low Risk
+    - 0.25 ile 0.55 arası: Medium Risk
+    - 0.55 ve üzeri: High Risk
+"""
 def get_risk_band(bad_credit_probability):
     if bad_credit_probability < 0.25:
         return "Low Risk"
@@ -69,6 +87,17 @@ def get_risk_band(bad_credit_probability):
         return "High Risk"
 
 #Tahmin başlamadan önce müşteri verisi kontrol ediliyor.
+"""Tek bir müşteri verisi için kredi risk tahmini yapar.
+
+    Fonksiyon şu çıktıları üretir:
+    - prediction: Modelin sınıf tahmini
+    - prediction_label: Tahminin okunabilir etiketi
+    - bad_credit_probability: Kötü kredi olasılığı
+    - good_credit_probability: İyi kredi olasılığı
+    - credit_score: 300–850 aralığında model tabanlı kredi skoru
+    - decision: APPROVE, REVIEW veya DECLINE kararı
+    - risk_band: Low Risk, Medium Risk veya High Risk seviyesi
+"""
 def predict_credit_risk(customer_data):
     validate_customer_data(customer_data)
 
