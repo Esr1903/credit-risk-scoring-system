@@ -117,6 +117,108 @@ Bu dosya, tek bir müşteri başvurusuna ait örnek input değerlerini içerir.
 
 Manuel tahmin testi çalıştırıldığında `tests/test_predict_manual.py` dosyası bu JSON dosyasını okur ve `predict_credit_risk()` fonksiyonuna gönderir.
 
+
+## API Kullanımı
+
+Projede FastAPI ile geliştirilmiş basit bir API katmanı bulunmaktadır.
+
+API dosyası:
+
+```text
+api/main.py
+```
+
+Mevcut endpointler:
+
+```text
+GET /
+GET /health
+POST /predict
+```
+
+API sunucusunu başlatmak için:
+
+```powershell
+uvicorn api.main:app --reload
+```
+
+Sunucu çalıştıktan sonra FastAPI dokümantasyon ekranı şu adresten açılabilir:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Health kontrolü için:
+
+```text
+http://127.0.0.1:8000/health
+```
+
+Beklenen cevap:
+
+```json
+{
+  "status": "ok",
+  "message": "Credit Risk API is running"
+}
+```
+
+Model tahmini için `POST /predict` endpoint'i kullanılır.
+
+Örnek input:
+
+```json
+{
+  "status": 1,
+  "duration": 24,
+  "credit_history": 2,
+  "purpose": 3,
+  "amount": 3000,
+  "savings": 2,
+  "employment_duration": 3,
+  "installment_rate": 4,
+  "personal_status_sex": 3,
+  "other_debtors": 1,
+  "present_residence": 2,
+  "property": 2,
+  "age": 35,
+  "other_installment_plans": 3,
+  "housing": 2,
+  "number_credits": 1,
+  "job": 3,
+  "people_liable": 2,
+  "telephone": 1,
+  "foreign_worker": 2
+}
+```
+
+Örnek output:
+
+```json
+{
+  "prediction": 0,
+  "prediction_label": "Kötü kredi riski",
+  "bad_credit_probability": 0.683,
+  "good_credit_probability": 0.317,
+  "credit_score": 474,
+  "decision": "DECLINE",
+  "risk_band": "High Risk"
+}
+```
+
+API endpointlerini manuel test etmek için önce API sunucusu çalıştırılmalıdır:
+
+```powershell
+uvicorn api.main:app --reload
+```
+
+Sonra ayrı bir terminalden şu komut çalıştırılabilir:
+
+```powershell
+python tests/test_api_manual.py
+```
+
+
 ## Manuel Test Komutları
 
 Tahmin fonksiyonunu örnek müşteriyle test etmek için:
