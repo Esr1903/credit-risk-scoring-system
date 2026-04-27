@@ -35,8 +35,14 @@ sample_customer = {
     "foreign_worker": 2
 }
 
-
+#her alanı ayrı ayrı, daha okunabilir şekilde yazdırıyoruz.
 result = predict_credit_risk(sample_customer)
 
-print("Tahmin sonucu:")
-print(result)
+print("=== Credit Risk Prediction Result ===")
+print()
+print(f"Prediction Label: {result['prediction_label']}")
+print(f"Bad Credit Probability: {result['bad_credit_probability'] * 100:.1f}%")
+print(f"Good Credit Probability: {result['good_credit_probability'] * 100:.1f}%")
+print(f"Credit Score: {result['credit_score']} / 850")
+print(f"Decision: {result['decision']}")
+print(f"Risk Band: {result['risk_band']}")
