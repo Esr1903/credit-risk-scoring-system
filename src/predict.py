@@ -1,8 +1,10 @@
 import pandas as pd
 import joblib
+from pathlib import Path
 
-
-MODEL_PATH = "models/balanced_logistic_regression.pkl"
+#__file__ = src/predict.py dosyasının yolu
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+MODEL_PATH = PROJECT_ROOT / "models" / "balanced_logistic_regression.pkl"
 
 model = joblib.load(MODEL_PATH)
 
