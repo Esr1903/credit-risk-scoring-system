@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from src.predict import predict_credit_risk
 from api.schemas import CreditRiskInput, CreditRiskOutput
 
@@ -25,6 +25,10 @@ def health_check():
 
 @app.post("/predict", response_model=CreditRiskOutput)
 def predict(customer_data: CreditRiskInput):
-    customer_dict = customer_data.model_dump()
-    result = predict_credit_risk(customer_dict)
-    return result
+    try:
+        customer_dict = customer_data.model_dump()
+        result = predict_credit_risk(customer_dict)
+        return result
+
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error))
