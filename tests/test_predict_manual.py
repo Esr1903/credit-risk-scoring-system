@@ -1,8 +1,8 @@
 #src/predict.py içindeki predict_credit_risk fonksiyonunu örnek müşteriyle kolayca test etmek.
 ''' Bu dosya sadece:
 fonksiyon doğru çalışıyor mu?
-örnek müşteri için çıktı geliyor mu? diye kontrol etmek için.   '''
-
+jsondaki örnek müşteri için çıktı geliyor mu? diye kontrol etmek için.   '''
+import json
 import sys
 from pathlib import Path
 
@@ -12,28 +12,16 @@ sys.path.append(str(PROJECT_ROOT))
 
 from src.predict import predict_credit_risk
 
-sample_customer = {
-    "status": 1,
-    "duration": 24,
-    "credit_history": 2,
-    "purpose": 3,
-    "amount": 3000,
-    "savings": 2,
-    "employment_duration": 3,
-    "installment_rate": 4,
-    "personal_status_sex": 3,
-    "other_debtors": 1,
-    "present_residence": 2,
-    "property": 2,
-    "age": 35,
-    "other_installment_plans": 3,
-    "housing": 2,
-    "number_credits": 1,
-    "job": 3,
-    "people_liable": 2,
-    "telephone": 1,
-    "foreign_worker": 2
-}
+"""sample_customer.json dosyasının yolunu bul.
+Dosyayı oku.
+İçindeki JSON verisini Python sözlüğüne çevir.
+Bu sözlüğü sample_customer değişkenine ata."""
+sample_customer_path = PROJECT_ROOT / "data" / "sample" / "sample_customer.json"
+
+with open(sample_customer_path, "r", encoding="utf-8") as file:
+    sample_customer = json.load(file)
+
+
 
 #her alanı ayrı ayrı, daha okunabilir şekilde yazdırıyoruz.
 result = predict_credit_risk(sample_customer)

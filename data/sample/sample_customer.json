@@ -1,0 +1,22 @@
+{
+  "status": 1,
+  "duration": 24,
+  "credit_history": 2,
+  "purpose": 3,
+  "amount": 3000,
+  "savings": 2,
+  "employment_duration": 3,
+  "installment_rate": 4,
+  "personal_status_sex": 3,
+  "other_debtors": 1,
+  "present_residence": 2,
+  "property": 2,
+  "age": 35,
+  "other_installment_plans": 3,
+  "housing": 2,
+  "number_credits": 1,
+  "job": 3,
+  "people_liable": 2,
+  "telephone": 1,
+  "foreign_worker": 2
+}
