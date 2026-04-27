@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from src.predict import predict_credit_risk
+from api.schemas import CreditRiskInput, CreditRiskOutput
 
 app = FastAPI(
     title="Credit Risk Scoring API",
@@ -22,7 +23,8 @@ def health_check():
         "message": "Credit Risk API is running"
     }
 
-@app.post("/predict")
-def predict(customer_data: dict):
-    result = predict_credit_risk(customer_data)
+@app.post("/predict", response_model=CreditRiskOutput)
+def predict(customer_data: CreditRiskInput):
+    customer_dict = customer_data.model_dump()
+    result = predict_credit_risk(customer_dict)
     return result
