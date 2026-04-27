@@ -117,6 +117,152 @@ Bu dosya, tek bir müşteri başvurusuna ait örnek input değerlerini içerir.
 
 Manuel tahmin testi çalıştırıldığında `tests/test_predict_manual.py` dosyası bu JSON dosyasını okur ve `predict_credit_risk()` fonksiyonuna gönderir.
 
+## Streamlit Dashboard Kullanımı
+
+Projede kullanıcı dostu bir Streamlit tabanlı FinTech kredi skorlama dashboard'u bulunmaktadır.
+
+Dashboard dosyası:
+
+```text
+app/streamlit_app.py
+```
+
+Streamlit uygulamasını çalıştırmak için:
+
+```powershell
+streamlit run app/streamlit_app.py
+```
+
+Uygulama açıldığında tarayıcıda genellikle şu adresten erişilebilir:
+
+```text
+http://localhost:8501
+```
+
+Dashboard üzerinden kullanıcı müşteri başvuru bilgilerini girerek kredi risk tahmini alabilir.
+
+Dashboard çıktıları:
+
+```text
+Credit Score
+Repayment Risk
+APPROVE / REVIEW / DECLINE kararı
+Risk Band
+Bad Credit Probability
+Good Credit Probability
+AI Decision Explanation
+Risk Signals
+Positive Signals
+```
+
+Dashboard menüleri:
+
+```text
+Credit Scoring
+Dashboard
+Model Performance
+System Modules
+Portfolio Monitoring
+Methodology
+```
+
+### Credit Scoring
+
+Kullanıcının müşteri başvuru bilgilerini girdiği ana ekrandır.
+
+Bu ekranda kullanıcı:
+
+```text
+Applicant name
+Credit duration
+Credit amount
+Age
+Checking account status
+Credit history
+Savings level
+Employment duration
+Housing
+Job type
+```
+
+gibi bilgileri girer.
+
+Sonra şu butona basar:
+
+```text
+Analyze Credit Risk
+```
+
+Sistem model üzerinden kredi riskini tahmin eder ve aşağıdaki çıktıları üretir:
+
+```text
+Credit Score
+Recommended Decision
+Risk Band
+Bad Risk
+Good Credit
+```
+
+### Model Performance
+
+Bu ekran model performans analizini gösterir.
+
+Gösterilen metrikler:
+
+```text
+Accuracy
+Bad Credit Recall
+Model comparison
+Selected model
+```
+
+Final model olarak Balanced Logistic Regression kullanılmıştır.
+
+Bu model, kötü kredi riskini yakalama performansı dikkate alınarak seçilmiştir. Çünkü kredi risk problemlerinde riskli müşteriyi güvenli müşteri olarak sınıflandırmak finansal açıdan daha maliyetli olabilir.
+
+### System Modules
+
+Bu ekran, modern bir AI kredi risk sisteminde bulunması gereken modülleri gösterir:
+
+```text
+Data Ingestion & Unification
+Real-Time Scoring Engine
+Explainable Dashboard
+Portfolio Monitoring
+Compliance & Reporting
+Integration APIs
+```
+
+Bu proje kapsamında bazı modüller aktif olarak uygulanmış, bazıları ise prototip veya gelecek geliştirme alanı olarak gösterilmiştir.
+
+### Portfolio Monitoring
+
+Bu ekran, kredi portföyündeki müşterilerin risk dağılımını izlemek için prototip bir görünüm sunar.
+
+Gösterilen bilgiler:
+
+```text
+Low Risk Accounts
+Review Queue
+High Risk Alerts
+Portfolio Decision Distribution
+```
+
+### Methodology
+
+Bu ekran projenin teknik açıklamasını içerir:
+
+```text
+Dataset
+Target variable
+Model
+Credit score formula
+Decision thresholds
+Limitations
+Production requirements
+```
+
+
 
 ## API Kullanımı
 
