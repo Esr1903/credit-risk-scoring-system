@@ -83,10 +83,10 @@ PROPERTY = {
 }
 
 PERSONAL_STATUS = {
-    "Erkek - ayrılmış / boşanmış": 1,
-    "Kadın - evli / ayrılmış": 2,
-    "Erkek - bekar": 3,
-    "Erkek - evli / dul": 4,
+    "1 - Erkek, boşanmış / ayrılmış": 1,
+    "2 - Kadın, evli / boşanmış / ayrılmış": 2,
+    "3 - Erkek, bekar": 3,
+    "4 - Erkek, evli / dul": 4,
 }
 
 OTHER_DEBTORS = {
@@ -364,7 +364,14 @@ elif page == "Kredi Başvurusu":
             e1, e2, e3 = st.columns(3)
 
             with e1:
-                personal_label = st.selectbox("Medeni / kişisel durum", list(PERSONAL_STATUS.keys()))
+                personal_label = st.selectbox(
+                    "Cinsiyet ve medeni durum",
+                    list(PERSONAL_STATUS.keys()),
+                    help=(
+                        "Bu alan South German Credit veri setindeki hazır kategorilere göre kullanılır. "
+                        "Bazı alt gruplar, örneğin kadın bekar, veri setinde ayrı kategori olarak verilmemiştir."
+                    ),
+            )
                 debtor_label = st.selectbox("Diğer borçlu / kefil", list(OTHER_DEBTORS.keys()))
 
             with e2:
